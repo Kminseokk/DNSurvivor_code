@@ -114,7 +114,7 @@ public class Weapon : MonoBehaviour
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
 
-            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); // -1 => 무한한 관통, -1 is infinity per.
+            bullet.GetComponent<Bullet>().Init(damage, -100, Vector3.zero); // -1 => 무한한 관통, -100 is infinity per.
         }
     }
 

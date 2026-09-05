@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         this.damage = damage; // 변수선언 데미지 =  init에 있는 데미지 (매개변수로 받은) 
         this.per = per;
 
-        if (per > -1) // -1보다 크면 원거리네
+        if (per >= 0) // -1보다 크면 원거리네
         {
             rigid.velocity = dir * 15f;
         }
@@ -27,15 +27,23 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") || per == -1)
+        if (!collision.CompareTag("Enemy") || per == -100)
             return;
 
         per--;
 
-        if (per == -1)
+        if (per < 0)
         {
             rigid.velocity = Vector2.zero;
             gameObject.SetActive(false);
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Area") || per == -100)
+            return;
+
+        gameObject.SetActive(false);
     }
 }
